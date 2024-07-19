@@ -1,0 +1,92 @@
+[
+    {
+        "vendoremail": "abc@gmail.com",
+        "name": "Abc",
+        "status": "Active"
+    },
+    {
+        "vendoremail": "def@gmail.com",
+        "name": "Def",
+        "status": "Active"
+    },
+    {
+        "vendoremail": "ghi@gmail.com",
+        "name": "Ghi",
+        "status": "Inactive"
+    },
+    {
+        "vendoremail": "jkl@gmail.com",
+        "name": "Jkl",
+        "status": "Active"
+    },
+    {
+        "vendoremail": "mno@gmail.com",
+        "name": "Mno",
+        "status": "Inactive"
+    },
+    {
+        "vendoremail": "pqr@gmail.com",
+        "name": "Pqr",
+        "status": "Inactive"
+    },
+    {
+        "vendoremail": "stu@gmail.com",
+        "name": "Stu",
+        "status": "Active"
+    },
+    {
+        "vendoremail": "vwx@gmail.com",
+        "name": "Vwx",
+        "status": "Inactive"
+    },
+    {
+        "vendoremail": "yz@gmail.com",
+        "name": "Yz",
+        "status": "Active"
+    },
+    {
+        "vendoremail": "abc@gmail.com",
+        "name": "Abc",
+        "status": "Active"
+    },
+    {
+        "vendoremail": "def@gmail.com",
+        "name": "Def",
+        "status": "Active"
+    },
+    {
+        "vendoremail": "ghi@gmail.com",
+        "name": "Ghi",
+        "status": "Inactive"
+    },
+    {
+        "vendoremail": "jkl@gmail.com",
+        "name": "Jkl",
+        "status": "Active"
+    },
+    {
+        "vendoremail": "mno@gmail.com",
+        "name": "Mno",
+        "status": "Inactive"
+    },
+    {
+        "vendoremail": "pqr@gmail.com",
+        "name": "Pqr",
+        "status": "Inactive"
+    },
+    {
+        "vendoremail": "stu@gmail.com",
+        "name": "Stu",
+        "status": "Active"
+    },
+    {
+        "vendoremail": "vwx@gmail.com",
+        "name": "Vwx",
+        "status": "Inactive"
+    },
+    {
+        "vendoremail": "yz@gmail.com",
+        "name": "Yz",
+        "status": "Active"
+    }
+]

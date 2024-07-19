@@ -1,0 +1,162 @@
+[
+    {
+        "empid": "EMP1001",
+        "username": "Richard E. Skalski",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 1",
+        "status": "Active"
+    },
+    {
+        "empid": "EMP1002",
+        "username": "Donald M. Dillard",
+        "permissions": "Admin",
+        "tags": "VIP",
+        "department": "Department 2",
+        "status": "Active"
+    },
+    {
+        "empid": "EMP1003",
+        "username": "Tyler C. Rodriguez",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 3",
+        "status": "Inactive"
+    },
+    {
+        "empid": "EMP1004",
+        "username": "Roy D. Barron",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 1",
+        "status": "Active"
+    },
+    {
+        "empid": "EMP1005",
+        "username": "Anthony S. Hernandez",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 4",
+        "status": "Inactive"
+    },
+    {
+        "empid": "EMP1006",
+        "username": "Calvin E. Cuevas",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 2",
+        "status": "Active"
+    },
+    {
+        "empid": "EMP1007",
+        "username": "Jimmy A. McGuire",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 3",
+        "status": "Active"
+    },
+    {
+        "empid": "EMP1008",
+        "username": "Thomas M. Gadson",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 2",
+        "status": "Inactive"
+    },
+    {
+        "empid": "EMP1009",
+        "username": "Fred S. Cousins",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 4",
+        "status": "Active"
+    },
+    {
+        "empid": "EMP10010",
+        "username": "Russell A. Pearson",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 2",
+        "status": "Inactive"
+    },
+    {
+        "empid": "EMP1001",
+        "username": "Richard E. Skalski",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 1",
+        "status": "Active"
+    },
+    {
+        "empid": "EMP1002",
+        "username": "Donald M. Dillard",
+        "permissions": "Admin",
+        "tags": "VIP",
+        "department": "Department 2",
+        "status": "Active"
+    },
+    {
+        "empid": "EMP1003",
+        "username": "Tyler C. Rodriguez",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 3",
+        "status": "Inactive"
+    },
+    {
+        "empid": "EMP1004",
+        "username": "Roy D. Barron",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 1",
+        "status": "Active"
+    },
+    {
+        "empid": "EMP1005",
+        "username": "Anthony S. Hernandez",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 4",
+        "status": "Inactive"
+    },
+    {
+        "empid": "EMP1006",
+        "username": "Calvin E. Cuevas",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 2",
+        "status": "Active"
+    },
+    {
+        "empid": "EMP1007",
+        "username": "Jimmy A. McGuire",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 3",
+        "status": "Active"
+    },
+    {
+        "empid": "EMP1008",
+        "username": "Thomas M. Gadson",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 2",
+        "status": "Inactive"
+    },
+    {
+        "empid": "EMP1009",
+        "username": "Fred S. Cousins",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 4",
+        "status": "Active"
+    },
+    {
+        "empid": "EMP10010",
+        "username": "Russell A. Pearson",
+        "permissions": "User",
+        "tags": "VIP",
+        "department": "Department 2",
+        "status": "Inactive"
+    }
+]
