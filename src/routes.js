@@ -93,6 +93,13 @@ const routes = [
     component: SignIn,
     hideFromSidebar: true,  // Custom property
   },
+  {
+    name: "",
+    layout: "/auth",
+    path: "/sign-up",
+    component: SignUp,
+    hideFromSidebar: true,  // Custom property
+  },
 
 
   // {

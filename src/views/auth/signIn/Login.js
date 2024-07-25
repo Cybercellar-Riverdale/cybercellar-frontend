@@ -53,6 +53,7 @@ import { useAuth } from "../../../auth-context/auth.context";
 import AuthApi from "../../../api/auth";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import AuthService  from "../../../services/auth-service"
 function Login() {
   const { colorMode, toggleColorMode } = useColorMode();
   const [email, setEmail] = useState("");  // <-- Default values HERE
@@ -136,28 +137,45 @@ function Login() {
 
   const userName="Cyber Cellars"
 
-  const handleLogin = () => {
-    console.log("user1 in outside if:", user1);
-    if (user1.email === 'cyber@gmail.com' && user1.password === 'reset123') {
-      console.log("user1 in inside if:", user1);
-      setUser(user1);
-      localStorage.setItem("user", user);
-      localStorage.setItem("userName",userName);
-      toast.success('Sign in successfull', {
-        position: toast.POSITION.TOP_CENTER,
-        theme: colorMode,
-      }
-      );
-      window.location.href = "#/admin/default"
-      window.location.reload(true);
+  const handleLogin = async () => {
+    // console.log("user1 in outside if:", user1);
+    // if (user1.email === 'cyber@gmail.com' && user1.password === 'reset123') {
+    //   console.log("user1 in inside if:", user1);
+    //   setUser(user1);
+    //   localStorage.setItem("user", user);
+    //   localStorage.setItem("userName",userName);
+    //   toast.success('Sign in successfull', {
+    //     position: toast.POSITION.TOP_CENTER,
+    //     theme: colorMode,
+    //   }
+    //   );
+    //   window.location.href = "#/admin/default"
+    //   window.location.reload(true);
       // console.log("Correct credentials");
       // return history.push("#/admin/default");
+    try{
+      const userData = { email: email, password: password };
+  
+      const myData = {
+        data: {
+          type: "token",
+          attributes: { ...userData },
+        },
+      };
+      const authService = new AuthService()
+      const response = await authService.login(myData);
+      console.log(response)
     }
-    else {
-      toast.error('Please enter valid credentials', {
-        position: toast.POSITION.TOP_CENTER
+    catch (err) {
+      // toast.error('Please enter valid credentials', {
+      //   position: toast.POSITION.TOP_CENTER
+      // }
+      // );
+      if(err.errors)
+      {
+        setError(err.errors[0].detail)
       }
-      );
+      console.log(err)
     }
   }
   return (
@@ -176,7 +194,7 @@ function Login() {
         flexDirection='column'>
         <Box me='auto'>
           <Heading color={textColor} fontSize='36px' mb='10px'>
-            Sign IN
+            Sign In
           </Heading>
           <Text
             mb='36px'
@@ -241,7 +259,8 @@ function Login() {
                 fontWeight='500'
                 size='lg'
                 onChange={(event) => {
-                  handleChange(event);
+                  // handleChange(event);
+                  setEmail(event.target.value);
                 }}
                 name="email"
                 id="email"
@@ -265,7 +284,8 @@ function Login() {
                   type={show ? "text" : "password"}
                   variant='auth'
                   onChange={(event) => {
-                    handleChange(event);
+                    // handleChange(event);
+                    setPassword(event.target.value);
                   }}
                   name="password"
                   id="password"
@@ -322,6 +342,25 @@ function Login() {
               alignItems='start'
               maxW='100%'
               mt='0px'>
+              <Text color={textColorDetails} fontWeight='400' fontSize='14px'>
+                Don't have an account?
+                <NavLink to='/auth/sign-up'>
+                  <Text
+                    color={textColorBrand}
+                    as='span'
+                    ms='5px'
+                    fontWeight='500'>
+                    Register
+                  </Text>
+                </NavLink>
+              </Text>
+            </Flex>
+            {/* <Flex
+              flexDirection='column'
+              justifyContent='center'
+              alignItems='start'
+              maxW='100%'
+              mt='0px'> */}
               {/* <Text color={textColorDetails} fontWeight='400' fontSize='14px'>
                 Not registered yet?
                 <NavLink to='/auth/sign-up'>
@@ -334,7 +373,7 @@ function Login() {
                   </Text>
                 </NavLink>
               </Text> */}
-            </Flex>
+            {/* </Flex> */}
           </Flex>
         </Flex>
       </Flex>

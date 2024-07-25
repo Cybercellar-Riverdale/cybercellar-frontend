@@ -51,11 +51,14 @@ import illustration from "assets/img/auth/auth.png";
 import { FcGoogle } from "react-icons/fc";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
+import AuthService  from "../../../services/auth-service"
+import { jwtDecode } from "jwt-decode";
 
-function SignIn() {
+function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [organizationName, setOrganizationName] = useState("");
   const [buttonText, setButtonText] = useState("Sign up");
   const [error, setError] = useState(undefined);
   const history = useHistory();
@@ -94,23 +97,56 @@ function SignIn() {
     }
     try {
       setButtonText("Signing up");
-      let response = await AuthApi.Register({
-        username: name,
-        email,
-        password,
-      });
-      if (response.data && response.data.success === false) {
-        setButtonText("Sign up");
-        return setError(response.data.msg);
-      }
-      return history.push("/auth/sign-in");
-    } catch (err) {
+      // let response = await AuthApi.Register({
+      //   username: name,
+      //   email,
+      //   password,
+      // });
+      // if (response.data && response.data.success === false) {
+      //   setButtonText("Sign up");
+      //   return setError(response.data.msg);
+      // }
+
+      const newUser = { name: name, email: email, password: password, organization: "cybercellar", isAdmin: true };
+
+      const myData = {
+        data: {
+          type: "users",
+          attributes: { ...newUser, password_confirmation: newUser.password },
+          relationships: {
+            roles: {
+              data: [
+                {
+                  type: "roles",
+                  id: "1",
+                },
+              ],
+            },
+          },
+        },
+      };
+
+      const authService = new AuthService()
+      const response = await authService.register(myData);
+      console.log(response)
+      // const token = response.access_token
+
+      // localStorage.setItem("token", token);
+      // // setIsAuthenticated(true);
+      // const decodedToken = jwtDecode(token);
+      // console.log("Decoded token: ", decodedToken);
+      // // setOrganizationName(decodedToken.organizationName)
+      // console.log("OrganizationNameeee: ", organizationName);
+      // // setIsAdmin(decodedToken.isAdmin);
+      // console.log("is admin??", isAdmin); 
+      // return history.push("/admin/default");
+  } 
+    catch (err) {
       console.log(err);
       setButtonText("Sign up");
-      if (err.response) {
-        return setError(err.response.data.msg);
+      if (err.message) {
+        return setError(err.message);
       }
-      return setError("There has been an error.");
     }
   };
   return (
@@ -129,7 +165,7 @@ function SignIn() {
         flexDirection='column'>
         <Box me='auto'>
           <Heading color={textColor} fontSize='36px' mb='10px'>
-            Sign UP
+            Sign Up
           </Heading>
           <Text
             mb='36px'
@@ -137,7 +173,7 @@ function SignIn() {
             color={textColorSecondary}
             fontWeight='400'
             fontSize='md'>
-            Open-source Full-stack Starter built with React and Chakra
+            {/* Open-source Full-stack Starter built with React and Chakra */}
           </Text>
         </Box>
         <Flex
@@ -241,6 +277,29 @@ function SignIn() {
                     setError(undefined);
                   }}
                 />
+              {/* <FormLabel
+                display='flex'
+                ms='4px'
+                fontSize='sm'
+                fontWeight='500'
+                color={textColor}
+                mb='8px'>
+                Organization<Text color={brandStars}>*</Text>
+              </FormLabel>
+              <Input
+                isRequired={true}
+                variant='auth'
+                fontSize='sm'
+                ms={{ base: "0px", md: "0px" }}
+                placeholder='cybercellar'
+                mb='24px'
+                fontWeight='500'
+                size='lg'
+                onChange={(event) => {
+                  setOrganizationName(event.target.value);
+                  setError(undefined);
+                }}
+              /> */}
                 <InputRightElement display='flex' alignItems='center' mt='4px'>
                   <Icon
                     color={textColorSecondary}
@@ -288,4 +347,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;
