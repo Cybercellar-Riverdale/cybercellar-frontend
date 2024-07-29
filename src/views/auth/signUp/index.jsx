@@ -107,7 +107,7 @@ function SignUp() {
       //   return setError(response.data.msg);
       // }
 
-      const newUser = { name: name, email: email, password: password, organization: "cybercellar", isAdmin: true };
+      const newUser = { name: name, email: email, password: password, organization: organizationName, isAdmin: true };
 
       const myData = {
         data: {
@@ -255,6 +255,29 @@ function SignUp() {
                   setError(undefined);
                 }}
               />
+                            <FormLabel
+                display='flex'
+                ms='4px'
+                fontSize='sm'
+                fontWeight='500'
+                color={textColor}
+                mb='8px'>
+                Organization<Text color={brandStars}>*</Text>
+              </FormLabel>
+              <Input
+                isRequired={true}
+                variant='auth'
+                fontSize='sm'
+                ms={{ base: "0px", md: "0px" }}
+                placeholder='cybercellar'
+                mb='24px'
+                fontWeight='500'
+                size='lg'
+                onChange={(event) => {
+                  setOrganizationName(event.target.value);
+                  setError(undefined);
+                }}
+              />
               <FormLabel
                 ms='4px'
                 fontSize='sm'
@@ -277,29 +300,6 @@ function SignUp() {
                     setError(undefined);
                   }}
                 />
-              {/* <FormLabel
-                display='flex'
-                ms='4px'
-                fontSize='sm'
-                fontWeight='500'
-                color={textColor}
-                mb='8px'>
-                Organization<Text color={brandStars}>*</Text>
-              </FormLabel>
-              <Input
-                isRequired={true}
-                variant='auth'
-                fontSize='sm'
-                ms={{ base: "0px", md: "0px" }}
-                placeholder='cybercellar'
-                mb='24px'
-                fontWeight='500'
-                size='lg'
-                onChange={(event) => {
-                  setOrganizationName(event.target.value);
-                  setError(undefined);
-                }}
-              /> */}
                 <InputRightElement display='flex' alignItems='center' mt='4px'>
                   <Icon
                     color={textColorSecondary}
