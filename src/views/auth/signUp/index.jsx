@@ -129,9 +129,10 @@ function SignUp() {
       const authService = new AuthService()
       const response = await authService.register(myData);
       console.log(response)
-      // const token = response.access_token
+      
+      const token = response.access_token
 
-      // localStorage.setItem("token", token);
+      localStorage.setItem("token", token);
       // // setIsAuthenticated(true);
       // const decodedToken = jwtDecode(token);
       // console.log("Decoded token: ", decodedToken);
@@ -139,7 +140,7 @@ function SignUp() {
       // console.log("OrganizationNameeee: ", organizationName);
       // // setIsAdmin(decodedToken.isAdmin);
       // console.log("is admin??", isAdmin); 
-      // return history.push("/admin/default");
+      return history.push("/admin/default");
   } 
     catch (err) {
       console.log(err);

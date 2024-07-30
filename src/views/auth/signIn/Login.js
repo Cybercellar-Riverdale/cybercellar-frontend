@@ -165,6 +165,15 @@ function Login() {
       const authService = new AuthService()
       const response = await authService.login(myData);
       console.log(response)
+
+      const token = response.access_token
+
+      localStorage.setItem("token", token);
+
+      return history.push("/admin/default");
+
+
+
     }
     catch (err) {
       // toast.error('Please enter valid credentials', {
