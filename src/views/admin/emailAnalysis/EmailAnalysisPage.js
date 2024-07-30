@@ -6,10 +6,18 @@ import { useGlobalFilter, usePagination, useSortBy, useTable } from 'react-table
 import SPFCheckPie from '../incidentLog/SPFCheckPie';
 import DKIMCheckPie from '../incidentLog/DKIMCheckPie';
 import DMARCCheckPie from '../incidentLog/DMARCCheckPie';
+import axios from 'axios';
+import ReactJson from 'react-json-view';
 
 let details = '';
 function EmailAnalysisPage() {
     const [emailDetails, setEmailDetails] = useState('');
+    const [emailDetectionReports,setEmailDetectionReports] = useState({});
+    // state = {
+    //     'ip_check' : {},
+    //     'file_analysis' : {},
+    //     ..
+    // }
     const location = useLocation();
 
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -26,6 +34,103 @@ function EmailAnalysisPage() {
             setEmailDetails(location.state.emailDetails);
         }
     }, [location.state]);
+
+    // useEffect(async ()=>{
+    //     const response = await axios.post(
+    //         'https://api.sapling.ai/api/v1/edits',
+    //         {
+    //             "key": 'QUSJQPH4OQSWFO51YVZPLQCUJOGF6B83', // replace with your API key
+    //             "session_id": 'test session',
+    //             "text":'hello',
+    //         },
+    //     );
+	// 	console.log(response)
+    //     setemailDetectionReports(response)
+
+    //     // var temp_state = {...emailDetectionReports}
+    //     // temp_state['file_analysis'] = response
+    //     // setemailDetectionReports(temp_state)
+
+    //     console.log(emailDetectionReports)
+    // },[])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const ip_check_response = await axios.post(
+                    'https://api.sapling.ai/api/v1/edits',
+                    {
+                        key: 'QUSJQPH4OQSWFO51YVZPLQCUJOGF6B83', // replace with your API key
+                        session_id: 'test session',
+                        text: 'hello',
+                    },
+                );
+                if (ip_check_response.data) {
+                    setEmailDetectionReports({
+                        ip_check : ip_check_response
+                    });
+                } else {
+                    console.error('Unexpected response structure:', ip_check_response);
+                }
+
+                const domain_analysis_response = await axios.post(
+                    'https://api.sapling.ai/api/v1/sentiment',
+                    {
+                        key: 'QUSJQPH4OQSWFO51YVZPLQCUJOGF6B83',
+                        "text":"17 warnings have detailed information that is not shown.",
+                    },
+                );
+                if (domain_analysis_response.data) {
+                    var temp_state = {...emailDetectionReports}
+                    temp_state['domain_analysis'] = domain_analysis_response
+                    setEmailDetectionReports(temp_state)
+                } else {
+                    console.error('Unexpected response structure:', domain_analysis_response);
+                }
+
+                const link_analysis_response = await axios.post(
+                    'https://api.sapling.ai/api/v1/tone',
+                    {
+                        key: 'QUSJQPH4OQSWFO51YVZPLQCUJOGF6B83',
+                        "text":"Failed to parse source map from '/mnt/s/work/Cybercellar/cybercellar-frontend/node_modules/react-bootstrap-sweetalert/src/styles/SweetAlertStyles.ts'",
+                    },
+                );
+                if (link_analysis_response.data) {
+                    var temp_state = {...emailDetectionReports}
+                    temp_state['link_analysis'] = link_analysis_response
+                    setEmailDetectionReports(temp_state)
+                } else {
+                    console.error('Unexpected response structure:', link_analysis_response);
+                }
+
+                const file_analysis_response = await axios.post(
+                    'https://api.sapling.ai/api/v1/edits',
+                    {
+                        key: 'QUSJQPH4OQSWFO51YVZPLQCUJOGF6B83', // replace with your API key
+                        session_id: 'test session',
+                        text: 'WARNING in ./node_modules/react-bootstrap-sweetalert/dist/styles/SweetAlertStyles.js',
+                    },
+                );
+                if (domain_analysis_response.data) {
+                    var temp_state = {...emailDetectionReports}
+                    temp_state['file_analysis'] = file_analysis_response
+                    setEmailDetectionReports(temp_state)
+                } else {
+                    console.error('Unexpected response structure:', file_analysis_response);
+                }
+
+            } catch (err) {
+                console.error('API call error:', err.message);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        console.log('Updated emailDetectionReports state:', emailDetectionReports);
+    }, [emailDetectionReports]);
+
     const textColor = useColorModeValue("secondaryGray.900", "white");
     const borderTopColor = useColorModeValue("black", "white");
     const buttonBgColor = useColorModeValue("blackAlpha.100", "blackAlpha.300");
@@ -339,11 +444,59 @@ function EmailAnalysisPage() {
                                 <DMARCCheckPie />
                             </SimpleGrid>
                         </TabPanel>
+                        <TabPanel>
+                            <Textarea
+                                value={JSON.stringify(emailDetectionReports['ip_check'], null, 2)}
+                                readOnly
+                                width="100%"
+                                height="400px"
+                                fontFamily="monospace"
+                                bgColor="gray.100"
+                                color="black"
+                                p={4}
+                            />
+                        </TabPanel>
+                        <TabPanel>
+                        <Textarea
+                                value={JSON.stringify(emailDetectionReports['domain_analysis'], null, 2)}
+                                readOnly
+                                width="100%"
+                                height="400px"
+                                fontFamily="monospace"
+                                bgColor="gray.100"
+                                color="black"
+                                p={4}
+                            />
+                        </TabPanel>
+                        <TabPanel>
+                        <Textarea
+                                value={JSON.stringify(emailDetectionReports['link_analysis'], null, 2)}
+                                readOnly
+                                width="100%"
+                                height="400px"
+                                fontFamily="monospace"
+                                bgColor="gray.100"
+                                color="black"
+                                p={4}
+                            />
+                        </TabPanel>
+                        <TabPanel>
+                        <Textarea
+                                value={JSON.stringify(emailDetectionReports['file_analysis'], null, 2)}
+                                readOnly
+                                width="100%"
+                                height="400px"
+                                fontFamily="monospace"
+                                bgColor="gray.100"
+                                color="black"
+                                p={4}
+                            />
+                        </TabPanel>
                     </TabPanels>
                 </Tabs>
             </Card>
-            <Text fontSize='24px' fontWeight='700' mt={2}>Content Analysis</Text>
-            <Card boxShadow={cardShadow} >
+            <Text fontSize='24px' fontWeight='700' mt={2} style={{display:'none'}}>Content Analysis</Text>
+            <Card boxShadow={cardShadow} style={{display:'none'}}>
                 <Flex align='center' justify='space-between'>
                     <Card width='70%'>
                         <FormControl>
